@@ -1,10 +1,7 @@
-const fs = require('fs');
-
 // Function to parse CSV data
-function parseCSV(filePath, quoteChar = '"', delimiter = ',') {
+function parseCSV(csv, quoteChar = '"', delimiter = ',') {
 
-  const data = fs.readFileSync(filePath, 'utf8');
-  const rows = data.split("\n");
+  const rows = csv.split("\n");
   const headers = rows[0].split(",");
 
   const regex = new RegExp(`\\s*(${quoteChar})?(.*?)\\1\\s*(?:${delimiter}|$)`, 'gs');
@@ -13,7 +10,7 @@ function parseCSV(filePath, quoteChar = '"', delimiter = ',') {
     .map(m => m[2]) 
     .slice(0, -1); 
 
-  let lines = data.split('\n');
+  let lines = csv.split('\n');
   const heads = headers ?? match(lines.shift());
   lines = lines.slice(1);
   

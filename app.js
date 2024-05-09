@@ -2,9 +2,11 @@ require('dotenv').config();
 const app = require('express')();
 const port = process.env.PORT || 3131;
 const { parseCSV } = require('./helpers/parseCSV');
+const fs = require('fs');
 
+const csvFile = fs.readFileSync('./Mobile_Food_Facility_Permit.csv', 'utf8');
 // Parse CSV data into an array of objects
-const foodTrucks = parseCSV('./Mobile_Food_Facility_Permit.csv');
+const foodTrucks = parseCSV(csvFile);
 // Extract column headers from the first object in the foodTrucks array
 const columns = Object.keys(foodTrucks[0]);
 
@@ -29,4 +31,7 @@ app.get('/v1/foodtrucks/search', (req, res) => {
     
 });
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+app.server = app.listen(port, () => console.log(`Server is running on port ${port}`));
+app.foodTrucks = foodTrucks;
+
+module.exports = app;
