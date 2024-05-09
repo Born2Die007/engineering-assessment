@@ -6,7 +6,9 @@ Additionally, the current API logic is relatively basic, primarily checking for 
 
 ## Installation
 
-3. Install dependencies: `npm install`
+1. ```git clone https://github.com/Born2Die007/engineering-assessment.git```
+2. ```cd engineering-assessment && npm install```
+2. Install dependencies: `npm install`
 
 ## Configuration
 
